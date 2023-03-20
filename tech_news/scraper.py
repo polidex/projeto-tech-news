@@ -1,11 +1,25 @@
-# Requisito 1
+import time
+import requests
+from parsel import Selector
+
+
 def fetch(url):
-    """Seu código deve vir aqui"""
+    time.sleep(1)
+    try:
+        response = requests.get(url, {"user-agent": "Fake user-agent"},
+                                timeout=3)
+        if response.status_code == 200:
+            return response.text
+        else:
+            return None
+    except requests.ReadTimeout:
+        return None
 
 
-# Requisito 2
 def scrape_updates(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(text=html_content)
+    urls = selector.css('.cs-overlay-link::attr(href)').getall()
+    return urls
 
 
 # Requisito 3
