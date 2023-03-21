@@ -28,7 +28,9 @@ def search_by_date(date):
 # Requisito 9
 def search_by_category(category):
     news_list = []
-    read_category = search_news({'category': {'$regex': category, '$options': 'i'}})
+    read_category = search_news(
+        {'category': {'$regex': category, '$options': 'i'}}
+        )
 
     for i in read_category:
         news_list.append((i['title'], i['url']))
